@@ -4,7 +4,6 @@
  */
 package persistencia;
 
-import conexion.Conexion;
 import entidades.Alumno;
 import java.sql.Connection;
 import java.sql.Date;
@@ -40,7 +39,7 @@ public class AlumnoData {
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));//localDate a Date
             ps.setBoolean(5, alumno.isEstado()); // if reducido
-            if (ps.executeUpdate() >0) {
+            if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Alumno añadido con "
                         + "exito.");
             }
@@ -60,23 +59,20 @@ public class AlumnoData {
 
     public Alumno buscarAlumno(int id) {
         Alumno alumno = null;
-        String sql = "SELECT  dni, apellido, nombre, fechaNacimiento"
-                + " FROM alumno WHERE idAlumno=? AND estado = 1";
+        String sql = "SELECT * FROM alumno WHERE idAlumno=? AND estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 alumno = new Alumno();
-                alumno.setIdAlumno(rs.getInt(id));
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
-
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
@@ -85,13 +81,12 @@ public class AlumnoData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la "
                     + "tabla Alumno " + ex.getMessage());
         }
-
         return alumno;
     }
 
     public Alumno buscarAlumnoPorDni(int dni) {
         Alumno alumno = null;
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni=? AND estado = 1";
+        String sql = "SELECT * FROM alumno WHERE dni=? AND estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);

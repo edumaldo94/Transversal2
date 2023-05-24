@@ -9,54 +9,64 @@ package entidades;
  * @author edu-1
  */
 public class Inscripcion {
-    
-private Inscripcion idInscripto;
-    private int nota;
-    private  Alumno idAlumno;
-    private Materia idMateria;
+    private int idInscripto;
+    private double nota;
+    private int idAlumno;
+    private int idMateria;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(Inscripcion idInscripto, int nota, Alumno idAlumno, Materia idMateria) {
+    public Inscripcion(double nota, int idAlumno, int idMateria) {
+        this.nota = nota;
+        this.idAlumno = idAlumno;
+        this.idMateria = idMateria;
+    }
+    
+    public Inscripcion(int idInscripto, double nota, int idAlumno, int idMateria) {
         this.idInscripto = idInscripto;
         this.nota = nota;
         this.idAlumno = idAlumno;
         this.idMateria = idMateria;
     }
 
-    public Alumno getIdAlumno() {
+    public int getIdAlumno() {
         return idAlumno;
     }
 
-    public void setIdAlumno(Alumno idAlumno) {
+    public void setIdAlumno(int idAlumno) {
         this.idAlumno = idAlumno;
     }
 
-    public Materia getIdMateria() {
+    public int getIdMateria() {
         return idMateria;
     }
 
-    public void setIdMateria(Materia idMateria) {
+    public void setIdMateria(int idMateria) {
         this.idMateria = idMateria;
     }
     
-    public Inscripcion getIdInscripto() {
+    public int getIdInscripto() {
         return idInscripto;
     }
 
-    public void setIdInscripto(Inscripcion idInscripto) {
+    public void setIdInscripto(int idInscripto) {
         this.idInscripto = idInscripto;
     }
 
     
     
-    public int getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(double nota) {
         this.nota = nota;
+    }
+
+    @Override
+    public String toString() {
+        return "[ID Inscripto: " + idInscripto + " / Nota: " + nota + " / ID del Alumno: " + idAlumno + " / ID de la Materia: " + idMateria + ']';
     }
 
     

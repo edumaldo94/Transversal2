@@ -4,7 +4,6 @@
  */
 package persistencia;
 
-import conexion.Conexion;
 import entidades.Materia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +29,7 @@ public class MateriaData {
     public void guardarMateria(Materia materia) {
         try {
             String sql = "INSERT INTO materia(nombre, año, estado) "
-                    + "VALUES ( ?, ?, ?, ?)";
+                    + "VALUES ( ?, ?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -68,7 +65,7 @@ public class MateriaData {
 
             if (rs.next()) {
                 materia = new Materia();
-                materia.setIdMateria(rs.getInt(id));
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio(rs.getInt("año"));
                 materia.setEstado(rs.getBoolean("estado"));
@@ -87,7 +84,7 @@ public class MateriaData {
 
     }
 
-    public Materia modificarMateria(int id, Materia materia) {
+    public Materia modificarMateria(Materia materia) {
         try {
             String sql = "UPDATE materia SET nombre = ?, año = ? WHERE  idMateria = ?";
             PreparedStatement ps = null;
@@ -111,11 +108,10 @@ public class MateriaData {
 
     public void eliminarMateria(int id) {
         try {
-            String sql = "UPDATE materia SET estado = 0 WHERE idMateria = 5";
+            String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
-
             if (fila == 1) {
                 JOptionPane.showMessageDialog(null, " Se eliminó la Materia.");
             }
@@ -126,7 +122,7 @@ public class MateriaData {
 
     }
 
-    List<Materia> listaMateria() {
+    public List<Materia> listarMaterias() {
 
         List<Materia> materiaL = new ArrayList<>();
 
