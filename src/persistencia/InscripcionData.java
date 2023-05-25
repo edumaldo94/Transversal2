@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author edu-1
- */
 public class InscripcionData {
 
     private Connection con = null;

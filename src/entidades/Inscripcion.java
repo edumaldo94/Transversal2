@@ -1,4 +1,5 @@
 package entidades;
+
 public class Inscripcion {
     private int idInscripto;
     private double nota;

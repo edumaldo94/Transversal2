@@ -26,31 +26,142 @@ public class ViewMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        mAlum = new javax.swing.JMenu();
+        miCargarAlum = new javax.swing.JMenuItem();
+        miBuscarAlumXID = new javax.swing.JMenuItem();
+        miBuscarAlumXDNI = new javax.swing.JMenuItem();
+        miAlumActivos = new javax.swing.JMenuItem();
+        miModAlum = new javax.swing.JMenuItem();
+        miBajaAlum = new javax.swing.JMenuItem();
+        miAltaAlum = new javax.swing.JMenuItem();
+        mMat = new javax.swing.JMenu();
+        miCargarMat = new javax.swing.JMenuItem();
+        miBuscarMat = new javax.swing.JMenuItem();
+        miModMat = new javax.swing.JMenuItem();
+        miMatActivas = new javax.swing.JMenuItem();
+        miBajaMat = new javax.swing.JMenuItem();
+        miAltaMat = new javax.swing.JMenuItem();
+        mIns = new javax.swing.JMenu();
+        miCargarIns = new javax.swing.JMenuItem();
+        miVerIns = new javax.swing.JMenuItem();
+        miInsXAlum = new javax.swing.JMenuItem();
+        miMatCursadasXAlum = new javax.swing.JMenuItem();
+        miMatNoCursadasXAlum = new javax.swing.JMenuItem();
+        miModNota = new javax.swing.JMenuItem();
+        miBorrarIns = new javax.swing.JMenuItem();
+        mSalir = new javax.swing.JMenu();
+        miSalir = new javax.swing.JMenuItem();
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jDesktopPane1.setName("Universidad ULP"); // NOI18N
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        mAlum.setText("Alumnos");
 
-        jMenu2.setText("Salir");
-        jMenuBar1.add(jMenu2);
+        miCargarAlum.setText("Cargar alumno");
+        miCargarAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCargarAlumActionPerformed(evt);
+            }
+        });
+        mAlum.add(miCargarAlum);
 
-        setJMenuBar(jMenuBar1);
+        miBuscarAlumXID.setText("Buscar alumno por ID");
+        mAlum.add(miBuscarAlumXID);
+
+        miBuscarAlumXDNI.setText("Buscar alumno por DNI");
+        mAlum.add(miBuscarAlumXDNI);
+
+        miAlumActivos.setText("Ver alumnos activos");
+        mAlum.add(miAlumActivos);
+
+        miModAlum.setText("Modificar alumno");
+        mAlum.add(miModAlum);
+
+        miBajaAlum.setText("Dar de baja un alumno");
+        mAlum.add(miBajaAlum);
+
+        miAltaAlum.setText("Dar de alta un alumno");
+        mAlum.add(miAltaAlum);
+
+        jMenuBar2.add(mAlum);
+
+        mMat.setText("Materias");
+
+        miCargarMat.setText("Cargar materia");
+        mMat.add(miCargarMat);
+
+        miBuscarMat.setText("Buscar materia");
+        mMat.add(miBuscarMat);
+
+        miModMat.setText("Modificar materia");
+        mMat.add(miModMat);
+
+        miMatActivas.setText("Ver materias activas");
+        mMat.add(miMatActivas);
+
+        miBajaMat.setText("Dar de baja una materia");
+        mMat.add(miBajaMat);
+
+        miAltaMat.setText("Dar de alta una materia");
+        mMat.add(miAltaMat);
+
+        jMenuBar2.add(mMat);
+
+        mIns.setText("Inscripciones");
+
+        miCargarIns.setText("Cargar inscripcion");
+        mIns.add(miCargarIns);
+
+        miVerIns.setText("Ver inscripciones");
+        mIns.add(miVerIns);
+
+        miInsXAlum.setText("Inscripciones de un alumno");
+        mIns.add(miInsXAlum);
+
+        miMatCursadasXAlum.setText("Materias cursadas de un alumno");
+        mIns.add(miMatCursadasXAlum);
+
+        miMatNoCursadasXAlum.setText("Materias no cursadas de un alumno");
+        mIns.add(miMatNoCursadasXAlum);
+
+        miModNota.setText("Modificar una nota");
+        mIns.add(miModNota);
+
+        miBorrarIns.setText("Borrar una inscripcion");
+        mIns.add(miBorrarIns);
+
+        jMenuBar2.add(mIns);
+
+        mSalir.setText("Salir");
+
+        miSalir.setText("Salir del sistema");
+        miSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSalirActionPerformed(evt);
+            }
+        });
+        mSalir.add(miSalir);
+
+        jMenuBar2.add(mSalir);
+
+        setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,8 +174,18 @@ public class ViewMenu extends javax.swing.JFrame {
             .addComponent(jDesktopPane1)
         );
 
+        jDesktopPane1.getAccessibleContext().setAccessibleName("Universidad ULP");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_miSalirActionPerformed
+
+    private void miCargarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCargarAlumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miCargarAlumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,8 +224,32 @@ public class ViewMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenu mAlum;
+    private javax.swing.JMenu mIns;
+    private javax.swing.JMenu mMat;
+    private javax.swing.JMenu mSalir;
+    private javax.swing.JMenuItem miAltaAlum;
+    private javax.swing.JMenuItem miAltaMat;
+    private javax.swing.JMenuItem miAlumActivos;
+    private javax.swing.JMenuItem miBajaAlum;
+    private javax.swing.JMenuItem miBajaMat;
+    private javax.swing.JMenuItem miBorrarIns;
+    private javax.swing.JMenuItem miBuscarAlumXDNI;
+    private javax.swing.JMenuItem miBuscarAlumXID;
+    private javax.swing.JMenuItem miBuscarMat;
+    private javax.swing.JMenuItem miCargarAlum;
+    private javax.swing.JMenuItem miCargarIns;
+    private javax.swing.JMenuItem miCargarMat;
+    private javax.swing.JMenuItem miInsXAlum;
+    private javax.swing.JMenuItem miMatActivas;
+    private javax.swing.JMenuItem miMatCursadasXAlum;
+    private javax.swing.JMenuItem miMatNoCursadasXAlum;
+    private javax.swing.JMenuItem miModAlum;
+    private javax.swing.JMenuItem miModMat;
+    private javax.swing.JMenuItem miModNota;
+    private javax.swing.JMenuItem miSalir;
+    private javax.swing.JMenuItem miVerIns;
     // End of variables declaration//GEN-END:variables
 }

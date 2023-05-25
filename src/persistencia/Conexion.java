@@ -4,10 +4,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author edu-1
- */
 public class Conexion {
 
     private static final String URL = "jdbc:mysql://localhost/";

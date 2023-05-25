@@ -10,15 +10,8 @@ import java.util.Scanner;
 import persistencia.InscripcionData;
 import persistencia.MateriaData;
 
-/**
- *
- * @author edu-1
- */
 public class Transversal2 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         boolean salir = true;
@@ -43,11 +36,11 @@ public class Transversal2 {
             System.out.println("8- Cargar una nueva Materia");
             System.out.println("9- Buscar Materia por ID");
             System.out.println("10- Modificar una Materia por su ID");
-            System.out.println("11- Dar de baja a una Materia por su ID");
-            System.out.println("12- Listar las Materias activas");
+            System.out.println("11- Listar las Materias activas");
+            System.out.println("12- Dar de baja a una Materia por su ID");
             System.out.println("13- Dar de alta a una Materia por su ID");
             System.out.println("---------INSCRIPCIONES---------");
-            System.out.println("14- Guardar una inscripcion");
+            System.out.println("14- Cargar una inscripcion");
             System.out.println("15- Obtener Inscripciones");
             System.out.println("16- Obtener Inscripciones de un Alumno por su ID");
             System.out.println("17- Obtener Materias Cursadas de un Alumno");
@@ -172,11 +165,6 @@ public class Transversal2 {
                     matData.modificarMateria(new Materia(idModMat,nombreModMat,anioModMat,true));
                 break;
                 case 11:
-                    System.out.println("Ingrese el ID de la Materia que sera dada de baja");
-                    int idBajaMat = leer.nextInt();
-                    matData.eliminarMateria(idBajaMat);
-                break;
-                case 12:
                     List<Materia> materias = new ArrayList<>();
                     materias = matData.listarMaterias();
                     for (int i = 0; i < materias.size(); i++) {
@@ -186,6 +174,11 @@ public class Transversal2 {
                         System.out.println("Anio: " + materias.get(i).getAnio());
                         System.out.println("Estado activo: " + materias.get(i).isEstado());
                     }
+                break;
+                case 12:
+                    System.out.println("Ingrese el ID de la Materia que sera dada de baja");
+                    int idBajaMat = leer.nextInt();
+                    matData.eliminarMateria(idBajaMat);
                 break;
                 case 13:
                     System.out.println("Ingrese el ID de la Materia que sera dada de alta");
