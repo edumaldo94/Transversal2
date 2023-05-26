@@ -2,152 +2,85 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JMenu" name="jMenu2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jMenu2"/>
-      </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar2">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="mAlum">
+        <Menu class="javax.swing.JMenu" name="jMenuAlumno">
           <Properties>
             <Property name="text" type="java.lang.String" value="Alumnos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miCargarAlum">
+            <MenuItem class="javax.swing.JMenuItem" name="jAlumno">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cargar alumno"/>
+                <Property name="text" type="java.lang.String" value="Formulario de Alumnos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miCargarAlumActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAlumnoActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miBuscarAlumXID">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar alumno por ID"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miBuscarAlumXDNI">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar alumno por DNI"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miAlumActivos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ver alumnos activos"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModAlum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar alumno"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miBajaAlum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Dar de baja un alumno"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miAltaAlum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Dar de alta un alumno"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMat">
+        <Menu class="javax.swing.JMenu" name="jMenuMateria">
           <Properties>
             <Property name="text" type="java.lang.String" value="Materias"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miCargarMat">
+            <MenuItem class="javax.swing.JMenuItem" name="jMateria">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cargar materia"/>
+                <Property name="text" type="java.lang.String" value="Formulario de Materias"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miBuscarMat">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar materia"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModMat">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar materia"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miMatActivas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ver materias activas"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miBajaMat">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Dar de baja una materia"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miAltaMat">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Dar de alta una materia"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMateriaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mIns">
+        <Menu class="javax.swing.JMenu" name="jMenuInscripcion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Inscripciones"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miCargarIns">
+            <MenuItem class="javax.swing.JMenuItem" name="jInscripcion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cargar inscripcion"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miVerIns">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ver inscripciones"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miInsXAlum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Inscripciones de un alumno"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miMatCursadasXAlum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Materias cursadas de un alumno"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miMatNoCursadasXAlum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Materias no cursadas de un alumno"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModNota">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar una nota"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miBorrarIns">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Borrar una inscripcion"/>
+                <Property name="text" type="java.lang.String" value="Manejo de Inscripciones"/>
               </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mSalir">
+        <Menu class="javax.swing.JMenu" name="jMenuNota">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Carga de Notas"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jNotasEditar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Manipulacion de Notas"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuConsulta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultas"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jListAlumnxMateria">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Listado de Alumnos por Materias"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuSalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miSalir">
+            <MenuItem class="javax.swing.JMenuItem" name="jSalir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir del sistema"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSalirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSalirActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -178,17 +111,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jDesktopPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jEscritorio" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jDesktopPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jEscritorio" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JDesktopPane" name="jDesktopPane1">
+    <Container class="javax.swing.JDesktopPane" name="jEscritorio">
       <Properties>
         <Property name="name" type="java.lang.String" value="Universidad ULP" noResource="true"/>
       </Properties>
