@@ -4,6 +4,8 @@
  */
 package vista;
 
+import entidades.Alumno;
+
 /**
  *
  * @author edu-1
@@ -84,6 +86,11 @@ public class ViewMenu extends javax.swing.JFrame {
         jMenuInscripcion.setText("Inscripciones");
 
         jInscripcion.setText("Manejo de Inscripciones");
+        jInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jInscripcionActionPerformed(evt);
+            }
+        });
         jMenuInscripcion.add(jInscripcion);
 
         jMenuBar2.add(jMenuInscripcion);
@@ -154,6 +161,16 @@ public class ViewMenu extends javax.swing.JFrame {
         va.setVisible(true);
         jEscritorio.add(va);
     }//GEN-LAST:event_jAlumnoActionPerformed
+
+    private void jInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInscripcionActionPerformed
+        // TODO add your handling code here:
+         jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ViewInscripcion inscrip = new ViewInscripcion();
+        inscrip.setVisible(true);
+        jEscritorio.add(inscrip);
+                                      
+    }//GEN-LAST:event_jInscripcionActionPerformed
 
     /**
      * @param args the command line arguments
