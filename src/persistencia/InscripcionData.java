@@ -138,7 +138,7 @@ private Conexion conexion;
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error 1: "+ex.getMessage());
         }
         return materias;
     }

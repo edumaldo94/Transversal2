@@ -1,4 +1,5 @@
 package transversal2;
+
 import persistencia.AlumnoData;
 import entidades.Alumno;
 import entidades.Inscripcion;
@@ -98,14 +99,14 @@ public class Transversal2 {
                     alumnos = alumData.listarAlumnos();
                     for (int i = 0; i < alumnos.size(); i++) {
                         System.out.println("");
-                        System.out.println("ID del Alumno: "+alumnos.get(i).getIdAlumno());
+                        System.out.println("ID del Alumno: " + alumnos.get(i).getIdAlumno());
                         System.out.println("Nombre: " + alumnos.get(i).getNombre());
                         System.out.println("Apellido: " + alumnos.get(i).getApellido());
                         System.out.println("DNI: " + alumnos.get(i).getDni());
                         System.out.println("Fecha de Nacimiento: " + alumnos.get(i).getFechaNacimiento());
                         System.out.println("Estado activo: " + alumnos.get(i).isEstado());
                     }
-                break;
+                    break;
                 case 5:
                     System.out.println("Ingrese la ID del Alumno que sera modificado");
                     int idMod = leer.nextInt();
@@ -124,18 +125,18 @@ public class Transversal2 {
                     System.out.println("Dia: ");
                     int diaMod = leer.nextInt();
                     fechaMod = LocalDate.of(anioMod, mesMod, diaMod);
-                    alumData.modificarAlumno(new Alumno(idMod,dniMod,apellidoMod,nombreMod,fechaMod,true));
-                break;
+                    alumData.modificarAlumno(new Alumno(idMod, dniMod, apellidoMod, nombreMod, fechaMod, true));
+                    break;
                 case 6:
                     System.out.println("Ingrese la ID del Alumno a dar de baja");
                     int idBaja = leer.nextInt();
                     alumData.eliminarAlumno(idBaja);
-                break;
+                    break;
                 case 7:
                     System.out.println("Ingrese la ID del Alumno a dar de alta");
                     int idAlta = leer.nextInt();
                     alumData.activarAlumno(idAlta);
-                break;
+                    break;
                 //Materias
                 case 8:
                     System.out.println("Ingrese la nueva Materia");
@@ -143,17 +144,17 @@ public class Transversal2 {
                     String nombreMateria = leer.next();
                     System.out.println("Anio: ");
                     int anioMateria = leer.nextInt();
-                    matData.guardarMateria(new Materia(nombreMateria,anioMateria,true));
-                break;
+                    matData.guardarMateria(new Materia(nombreMateria, anioMateria, true));
+                    break;
                 case 9:
                     System.out.println("Ingrese el ID de la Materia a buscar");
                     int idBuscarMat = leer.nextInt();
                     Materia matBuscada = matData.buscarMateria(idBuscarMat);
                     System.out.println("Datos de la Materia");
-                    System.out.println("Nombre: "+matBuscada.getNombre());
-                    System.out.println("Anio: "+matBuscada.getAnio());
-                    System.out.println("Estado activo: "+matBuscada.isEstado());
-                    System.out.println("ID: "+matBuscada.getIdMateria());
+                    System.out.println("Nombre: " + matBuscada.getNombre());
+                    System.out.println("Anio: " + matBuscada.getAnio());
+                    System.out.println("Estado activo: " + matBuscada.isEstado());
+                    System.out.println("ID: " + matBuscada.getIdMateria());
                 case 10:
                     System.out.println("Ingrese la ID de la Materia que sera modificada");
                     int idModMat = leer.nextInt();
@@ -162,29 +163,29 @@ public class Transversal2 {
                     String nombreModMat = leer.next();
                     System.out.println("Anio: ");
                     int anioModMat = leer.nextInt();
-                    matData.modificarMateria(new Materia(idModMat,nombreModMat,anioModMat,true));
-                break;
+                    matData.modificarMateria(new Materia(idModMat, nombreModMat, anioModMat, true));
+                    break;
                 case 11:
                     List<Materia> materias = new ArrayList<>();
                     materias = matData.listarMaterias();
                     for (int i = 0; i < materias.size(); i++) {
                         System.out.println("");
-                        System.out.println("ID de la Materia: "+materias.get(i).getIdMateria());
+                        System.out.println("ID de la Materia: " + materias.get(i).getIdMateria());
                         System.out.println("Nombre: " + materias.get(i).getNombre());
                         System.out.println("Anio: " + materias.get(i).getAnio());
                         System.out.println("Estado activo: " + materias.get(i).isEstado());
                     }
-                break;
+                    break;
                 case 12:
                     System.out.println("Ingrese el ID de la Materia que sera dada de baja");
                     int idBajaMat = leer.nextInt();
                     matData.eliminarMateria(idBajaMat);
-                break;
+                    break;
                 case 13:
                     System.out.println("Ingrese el ID de la Materia que sera dada de alta");
                     int idAltaMat = leer.nextInt();
                     matData.activarMateria(idAltaMat);
-                break;
+                    break;
                 //Inscripciones
                 case 14:
                     System.out.println("Ingrese el ID del Alumno");
@@ -193,15 +194,15 @@ public class Transversal2 {
                     int idM = leer.nextInt();
                     System.out.println("Ingrese la Nota");
                     double notaA = leer.nextDouble();
-                    insData.guardarIncripcion(new Inscripcion(notaA,idA,idM));
-                break;
+                    insData.guardarIncripcion(new Inscripcion(notaA, idA, idM));
+                    break;
                 case 15:
                     List<Inscripcion> inscripciones = new ArrayList<>();
                     inscripciones = insData.obtenerInscripciones();
                     for (Inscripcion aux : inscripciones) {
                         System.out.println(aux);
                     }
-                break;
+                    break;
                 case 16:
                     System.out.println("Ingrese la ID del Alumno para mostrar sus Inscripciones");
                     int idIns = leer.nextInt();
@@ -210,7 +211,7 @@ public class Transversal2 {
                     for (Inscripcion auxIns : inscripcionesXAlumno) {
                         System.out.println(auxIns);
                     }
-                break;
+                    break;
                 case 17:
                     System.out.println("Ingrese la ID del Alumno para mostrar en que Materias esta inscripto");
                     int idAlumIns = leer.nextInt();
@@ -219,7 +220,7 @@ public class Transversal2 {
                     for (Materia alumInsAux : alumInscripciones) {
                         System.out.println(alumInsAux);
                     }
-                break;
+                    break;
                 case 18:
                     System.out.println("Ingrese la ID del Alumno para mostrar en que Materias NO esta inscripto");
                     int idAlumNOIns = leer.nextInt();
@@ -228,14 +229,14 @@ public class Transversal2 {
                     for (Materia alumNOInsAux : alumNOInscripciones) {
                         System.out.println(alumNOInsAux);
                     }
-                break;
+                    break;
                 case 19:
                     System.out.println("Ingrese la ID del Alumno");
                     int idAlumDel = leer.nextInt();
                     System.out.println("Ingrese la ID de la Materia");
                     int idMatDel = leer.nextInt();
                     insData.borrarInscripcionMateriaAlumno(idAlumDel, idMatDel);
-                break;
+                    break;
                 case 20:
                     System.out.println("Ingrese la ID del Alumno");
                     int idAlumNot = leer.nextInt();
@@ -244,7 +245,7 @@ public class Transversal2 {
                     System.out.println("Ingrese la nueva Nota");
                     double notNueva = leer.nextDouble();
                     insData.actualizarNota(idAlumNot, idMatNot, notNueva);
-                break;
+                    break;
                 case 21:
                     System.out.println("Ingrese el ID de la Materias");
                     int idMatLisAlum = leer.nextInt();
@@ -253,7 +254,7 @@ public class Transversal2 {
                     for (Alumno alumnosXMatAux : alumnosXMat) {
                         System.out.println(alumnosXMatAux);
                     }
-                break;
+                    break;
                 case 0:
                     salir = false;
                     break;
