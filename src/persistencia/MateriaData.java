@@ -46,7 +46,7 @@ public class MateriaData {
 
     public Materia buscarMateria(int id) {
         Materia materia = null;
-        String sql = "SELECT * FROM materia WHERE idMateria=? AND estado=1";
+        String sql = "SELECT * FROM materia WHERE idMateria=? ";
         PreparedStatement ps = null;
 
         try {
@@ -118,7 +118,7 @@ public class MateriaData {
         List<Materia> materiaL = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM materia WHERE estado = 1 ";
+            String sql = "SELECT * FROM materia WHERE 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 

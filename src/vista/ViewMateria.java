@@ -2,28 +2,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
+
 package vista;
 
 import entidades.Materia;
 import java.awt.Component;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import persistencia.MateriaData;
+import static vista.ViewMateria.materiaData;
 
 /**
  *
  * @author edu-1
  */
 public class ViewMateria extends javax.swing.JInternalFrame {
-public static MateriaData materiaData=new MateriaData();
-public  Materia materia=new Materia();
+
+    public static MateriaData materiaData ;
+    public Materia materia = new Materia();
+    
+
     /**
      * Creates new form ViewMateria
      */
     public ViewMateria() {
         initComponents();
-        this.materiaData=materiaData;
-       this.materia=materia;
+        materiaData = new MateriaData();
+        materia = new Materia();
+
     }
 
     /**
@@ -42,7 +53,7 @@ public  Materia materia=new Materia();
         jLabelNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabelAnio = new javax.swing.JLabel();
-        txtAnio = new javax.swing.JTextField();
+        txtAni = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
@@ -51,9 +62,11 @@ public  Materia materia=new Materia();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListaMateria = new javax.swing.JTable();
         btnLista = new javax.swing.JButton();
+        jActivar = new javax.swing.JCheckBox();
 
         jEstado.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jEstado.setText("Estado");
+        jEstado.setEnabled(false);
         jEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jEstadoActionPerformed(evt);
@@ -61,14 +74,42 @@ public  Materia materia=new Materia();
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtCodigo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCodigoMouseClicked(evt);
+            }
+        });
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
 
         jLabelCodigo.setText("Codigo:");
 
         jLabelNombre.setText("Nombre:");
 
+        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNombreMouseClicked(evt);
+            }
+        });
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+
         jLabelAnio.setText("Año:");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -76,6 +117,7 @@ public  Materia materia=new Materia();
         });
 
         btnBorrar.setText("Borrar");
+        btnBorrar.setEnabled(false);
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -83,8 +125,19 @@ public  Materia materia=new Materia();
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.setEnabled(false);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("MATERIAS");
@@ -97,7 +150,7 @@ public  Materia materia=new Materia();
                 {null, null, null, null}
             },
             new String [] {
-                "idMateria", "Nombre", "Año", "Estaddo"
+                "idMateria", "Nombre", "Año", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -114,6 +167,14 @@ public  Materia materia=new Materia();
         btnLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListaActionPerformed(evt);
+            }
+        });
+
+        jActivar.setText("Activar");
+        jActivar.setEnabled(false);
+        jActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jActivarActionPerformed(evt);
             }
         });
 
@@ -134,33 +195,30 @@ public  Materia materia=new Materia();
                             .addComponent(jLabelAnio)
                             .addComponent(jLabelCodigo))
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(80, 80, 80)
                                 .addComponent(btnBuscar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnLimpiar))
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAni, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jEstado))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jActivar)
+                                    .addComponent(btnLimpiar))))
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnGuardar)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jEstado)
-                                .addGap(97, 97, 97))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBorrar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnActualizar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLista)
-                                .addContainerGap())))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBorrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnActualizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLista)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 7, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,50 +242,205 @@ public  Materia materia=new Materia();
                             .addComponent(jLabelNombre))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelAnio)))
                     .addComponent(btnLimpiar))
                 .addGap(26, 26, 26)
-                .addComponent(jEstado)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jEstado)
+                    .addComponent(jActivar))
+                .addGap(18, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnBorrar)
                     .addComponent(btnActualizar)
                     .addComponent(btnLista))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jEstadoActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+      try{
+        int id = Integer.parseInt(txtCodigo.getText());
+           jActivar.setEnabled(false);
+        materiaData.eliminarMateria(id);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR ");
+
+        }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
-     
-    
-        
+DefaultTableModel tabla=new DefaultTableModel();
+List<Materia>dato;
+String [] fila = new String[4];
+    tabla.addColumn("idMateria");
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Año");
+        tabla.addColumn("Estado");
+        dato=materiaData.listarMaterias();
+        for (int i = 0; i < dato.size(); i++) {
+            fila[0]=dato.get(i).getIdMateria()+"";
+            fila[1]=dato.get(i).getNombre();
+            fila[2]=dato.get(i).getAnio()+"";
+            fila[3]=dato.get(i).isEstado()+"";
+            tabla.addRow(fila);
+        }
+        jListaMateria.setModel(tabla);
+
     }//GEN-LAST:event_btnListaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+   try {
+        
+        String name = txtNombre.getText();
+        int anio = Integer.parseInt(txtAni.getText());
+        boolean estado = jEstado.isSelected();
+        
+        materia = new Materia(name, anio, estado);
        
-       
-        String name=txtNombre.getText();
-        int anio=Integer.parseInt(txtAnio.getText());
-        boolean estado= jEstado.isSelected();
-        materia= new Materia(name,anio,estado);
         materiaData.guardarMateria(materia);
+         txtCodigo.setText(materia.getIdMateria()+"");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR ");
+
+        }
+   jEstado.setEnabled(false);
+        btnGuardar.setEnabled(false);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
+        try {
+
+            int id = Integer.parseInt(txtCodigo.getText());
+            materia = materiaData.buscarMateria(id);
+
+            txtNombre.setText(materia.getNombre());
+
+            txtAni.setText(materia.getAnio() + "");
+        
+           if (materia.isEstado() == false) {
+                  jActivar.setEnabled(true);
+                    
+                     boolean estado = jActivar.isSelected();
+                    materia.setEstado(estado);
+  
+            }
+            else{
+                    jActivar.setEnabled(false);
+            }
+               jEstado.setSelected(materia.isEstado());
+                  
+ btnBorrar.setEnabled(true);
+        btnActualizar.setEnabled(true);
+        
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR la materia debe estar Desactivada");
+ jEstado.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        jEstado.setEnabled(false);
+         btnBorrar.setEnabled(false);
+        btnActualizar.setEnabled(false);
+      
+        }
+
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        try {
+            int id = Integer.parseInt(txtCodigo.getText());
+            String name = txtNombre.getText();
+            int anio = Integer.parseInt(txtAni.getText());
+           jActivar.setEnabled(false);
+            materiaData.modificarMateria(new Materia(id, name, anio, true));
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR la materia debe estar Desactivada");
+
+        }
+         btnBorrar.setEnabled(false);
+        btnActualizar.setEnabled(false);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtAni.setText("");
+        jEstado.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        jEstado.setEnabled(false);
+         btnBorrar.setEnabled(false);
+        btnActualizar.setEnabled(false);
+           jActivar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseClicked
+      
+       if (btnBorrar.isEnabled() ==true) {
+              btnGuardar.setEnabled(false);
+        jEstado.setEnabled(false);
+           jActivar.setEnabled(false);
+       jEstado.setSelected(materia.isEstado());
+        }else{
+             btnGuardar.setEnabled(true);
+        jEstado.setEnabled(true);
+       }
+           
+        
+        
+        
+ 
+        
+    }//GEN-LAST:event_txtNombreMouseClicked
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+
+        btnBorrar.setEnabled(true);
+        btnActualizar.setEnabled(true);
+           jActivar.setEnabled(false);
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+
+         
+        
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCodigoMouseClicked
+        // TODO add your handling code here:
+         btnGuardar.setEnabled(false);
+        jEstado.setEnabled(false);
+           jActivar.setEnabled(false);
+    }//GEN-LAST:event_txtCodigoMouseClicked
+
+    private void jActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActivarActionPerformed
+      
+        try{
+        int id = Integer.parseInt(txtCodigo.getText());
+         materiaData.activarMateria(id);
+         jActivar.setSelected(false);
+     jActivar.setEnabled(false);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR ");
+
+        }
+    }//GEN-LAST:event_jActivarActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBorrar;
@@ -235,6 +448,7 @@ public  Materia materia=new Materia();
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLista;
+    private javax.swing.JCheckBox jActivar;
     private javax.swing.JCheckBox jEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAnio;
@@ -242,7 +456,7 @@ public  Materia materia=new Materia();
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JTable jListaMateria;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtAni;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
