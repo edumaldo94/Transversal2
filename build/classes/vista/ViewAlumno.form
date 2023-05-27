@@ -72,26 +72,22 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="tfApellido" pref="174" max="32767" attributes="0"/>
-                                                  <Component id="tfIdAlum" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="bBuscar" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="tfDNI" alignment="0" pref="174" max="32767" attributes="0"/>
-                                              <Component id="tfNombre" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfApellido" pref="174" max="32767" attributes="0"/>
+                                          <Component id="tfIdAlum" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="dFecha" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="bBuscar" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
                                       <Component id="lbAlumnos" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="dFecha" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfDNI" alignment="0" pref="174" max="32767" attributes="0"/>
+                                      <Component id="tfNombre" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -129,26 +125,28 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbFechaNac" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lbFechaNac" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bSalirAlum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bActivar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bLista" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="140" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="dFecha" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="checkEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bSalirAlum" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bActivar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bLista" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="140" max="-2" attributes="0"/>
               <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="lbResEstado" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -340,11 +338,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="com.toedter.calendar.JDateChooser" name="dFecha">
-      <Properties>
-        <Property name="dateFormatString" type="java.lang.String" value="yy/MM/dd"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="bActivar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Activar"/>
@@ -352,6 +345,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bActivarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dFecha">
     </Component>
   </SubComponents>
 </Form>

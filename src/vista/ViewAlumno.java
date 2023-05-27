@@ -58,8 +58,8 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         bLista = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tTabla = new javax.swing.JTable();
-        dFecha = new com.toedter.calendar.JDateChooser();
         bActivar = new javax.swing.JButton();
+        dFecha = new com.toedter.calendar.JDateChooser();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -158,8 +158,6 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tTabla);
 
-        dFecha.setDateFormatString("yy/MM/dd");
-
         bActivar.setText("Activar");
         bActivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,21 +209,19 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                                 .addGap(550, 550, 550))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(tfApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                                    .addComponent(tfIdAlum))
-                                                .addGap(28, 28, 28)
-                                                .addComponent(bBuscar))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(tfDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                                .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.LEADING)))
-                                        .addComponent(dFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                            .addComponent(tfIdAlum))
+                                        .addGap(28, 28, 28)
+                                        .addComponent(bBuscar))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGap(202, 202, 202)
-                                        .addComponent(lbAlumnos)))
+                                        .addComponent(lbAlumnos))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(dFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                        .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
@@ -251,23 +247,24 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                     .addComponent(lbDNI))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbFechaNac)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbFechaNac)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbEstado)
+                            .addComponent(checkEstado))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bGuardar)
+                            .addComponent(bBorrar)
+                            .addComponent(bActualizar)
+                            .addComponent(bLimpiar)
+                            .addComponent(bSalirAlum)
+                            .addComponent(bActivar)
+                            .addComponent(bLista))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(dFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbEstado)
-                    .addComponent(checkEstado))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bGuardar)
-                    .addComponent(bBorrar)
-                    .addComponent(bActualizar)
-                    .addComponent(bLimpiar)
-                    .addComponent(bSalirAlum)
-                    .addComponent(bActivar)
-                    .addComponent(bLista))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(lbResEstado))
         );

@@ -22,28 +22,30 @@ import persistencia.MateriaData;
  * @author edu-1
  */
 public class ViewInscripcion extends javax.swing.JInternalFrame {
-DefaultTableModel tabla=new DefaultTableModel();
+
+    DefaultTableModel tabla = new DefaultTableModel();
     public static InscripcionData inscripData;
     public static AlumnoData alumnoData;
 
     public static MateriaData materiaData;
-    public  List<Alumno>listaA;
+    public List<Alumno> listaA;
     public Inscripcion inscripcion;
     public Materia materia;
     public List<Materia> matTotal;
     public Alumno alumno;
-public Conexion con;
+    public Conexion con;
+
     /**
      * Creates new form ViewInscripcion
      */
     public ViewInscripcion() {
         initComponents();
-      
-        alumnoData= new AlumnoData();
-      
-      listaA=(ArrayList<Alumno>)alumnoData.listarAlumnos();
-      agregarAlumno();
-    
+
+        alumnoData = new AlumnoData();
+
+        listaA = (ArrayList<Alumno>) alumnoData.listarAlumnos();
+        agregarAlumno();
+
     }
 
     /**
@@ -114,6 +116,11 @@ public Conexion con;
         btnAnular.setText("Anular Inscripcion");
 
         btnSalir.setText("   Salir   ");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,21 +195,18 @@ public Conexion con;
 
     private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
 
-    
         inscripData.guardarIncripcion(inscripcion);
-       
+
     }//GEN-LAST:event_btnInscribirActionPerformed
 
     private void btnNoInscriptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoInscriptaActionPerformed
-        // TODO add your handling code here:
-       borrarTabla();
-    
-     agregarMateriaNO(alumno.getIdAlumno());
-  
-//                    for (Materia alumInsAux : alumInscripciones) {
-//                        System.out.println(alumInsAux);
-//                    }
+
+
     }//GEN-LAST:event_btnNoInscriptaActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -218,67 +222,49 @@ public Conexion con;
     private javax.swing.JTable jLista;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-   
-    public  void agregarAlumno() {
-        
-    Alumno lista=new Alumno();
-  
 
-    for (Iterator<Alumno> it = listaA.iterator(); it.hasNext();) {
-        lista = it.next();
-        jComboAlumno.addItem(lista.getIdAlumno()+" "+lista.getApellido()+" "+lista.getNombre()+" "+lista.getDni());
-   
+    public void agregarAlumno() {
+        Alumno lista = new Alumno();
+        for (Iterator<Alumno> it = listaA.iterator(); it.hasNext();) {
+            lista = it.next();
+            jComboAlumno.addItem(lista.getIdAlumno() + " " + lista.getApellido() + " " + lista.getNombre() + " " + lista.getDni());
+        }
     }
 
-       agregarMateriaNO(lista.getIdAlumno());
-    }
-    public  void agregarMateriaNO(int id) { 
-          borrarTabla();
-       
-          Alumno selec=(Alumno) jComboAlumno.getSelectedItem();
-       try{
-          
+    public void agregarMateriaNO(Alumno alumno) {
+        borrarTabla();
 
-             
-                  ArrayList<Materia> lisa = (ArrayList) inscripData.obtenerMateriasNOCursadas(alumno.getIdAlumno());
-           
-                        tabla.addColumn("id");
-                        tabla.addColumn("nombre");
-                        tabla.addColumn("año");
-                        
-//                
-           for (Materia materia1 : lisa) {
-               tabla.addRow(new Object[]{materia1.getIdMateria(),materia1.getNombre(),materia1.getAnio()});
-           }
-          
-                  String fila[]=new String[3];
-          
-//                    for (int i = 0; i < lisa.size(); i++) {
-//                        
-//                fila[0]=matTotal.get(i).getIdMateria()+"";
+        Alumno selec = (Alumno) jComboAlumno.getSelectedItem();
+        try {
+            ArrayList<Materia> lisa = (ArrayList) inscripData.obtenerMateriasNOCursadas(selec.getIdAlumno());
+            tabla.addColumn("id");
+            tabla.addColumn("nombre");
+            tabla.addColumn("año");
+            for (Materia materia1 : lisa) {
+                tabla.addRow(new Object[]{materia1.getIdMateria(), materia1.getNombre(), materia1.getAnio()});
+            }
+            String fila[] = new String[3];
+//          for (int i = 0; i < lisa.size(); i++) {     
+//            fila[0]=matTotal.get(i).getIdMateria()+"";
 //            fila[1]=matTotal.get(i).getNombre();
 //            fila[2]=matTotal.get(i).getAnio()+"";
-//            
-//             tabla.addRow(fila);
+//            tabla.addRow(fila);
 //        }
-                    jLista.setModel(tabla);
-            
-                       } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "ERROR "+ex.getMessage());
+            jLista.setModel(tabla);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR " + ex.getMessage());
 
         }
     }
-    public  void borrarTabla() {
+
+    public void borrarTabla() {
         if (tabla != null) {
-            int a= tabla.getRowCount()-1;
+            int a = tabla.getRowCount() - 1;
             for (int i = a; i > 0; i--) {
                 tabla.removeRow(i);
             }
         }
     }
-    
-     
-    
 
 }
-
