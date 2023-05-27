@@ -28,7 +28,7 @@ public class Transversal2 {
             System.out.println("1- Cargar un nuevo Alumno");
             System.out.println("2- Buscar Alumno por ID");
             System.out.println("3- Buscar Alumno por DNI");
-            System.out.println("4- Listar Alumnos activos");
+            System.out.println("4- Listar Alumnos");
             System.out.println("5- Modificar un Alumno por su ID");
             System.out.println("6- Dar de baja un Alumno por su ID");
             System.out.println("7- Dar de alta un Alumno por su ID");

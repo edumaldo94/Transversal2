@@ -35,7 +35,8 @@ public class AlumnoData {
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));//localDate a Date
             ps.setBoolean(5, alumno.isEstado()); // if reducido
-            if (ps.executeUpdate() > 0) {
+            int res = ps.executeUpdate();
+            if (res > 0) {
                 JOptionPane.showMessageDialog(null, "Alumno añadido con "
                         + "exito.");
             }
@@ -55,7 +56,7 @@ public class AlumnoData {
 
     public Alumno buscarAlumno(int id) {
         Alumno alumno = null;
-        String sql = "SELECT * FROM alumno WHERE idAlumno=? AND estado = 1";
+        String sql = "SELECT * FROM alumno WHERE idAlumno=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -68,7 +69,7 @@ public class AlumnoData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setEstado(true);
+                alumno.setEstado(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
@@ -82,7 +83,7 @@ public class AlumnoData {
 
     public Alumno buscarAlumnoPorDni(int dni) {
         Alumno alumno = null;
-        String sql = "SELECT * FROM alumno WHERE dni=? AND estado = 1";
+        String sql = "SELECT * FROM alumno WHERE dni=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -97,7 +98,6 @@ public class AlumnoData {
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
-
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
@@ -113,7 +113,7 @@ public class AlumnoData {
 
         List<Alumno> alumnos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM alumno WHERE estado = 1 ";
+            String sql = "SELECT * FROM alumno";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -138,7 +138,7 @@ public class AlumnoData {
     public void modificarAlumno(Alumno alumno) {
 
         String sql = "UPDATE alumno SET dni = ? , apellido = ?, nombre = ?, "
-                + "fechaNacimiento = ? WHERE  idAlumno = ?";
+                + "fechaNacimiento = ?, estado = ? WHERE  idAlumno = ?";
         PreparedStatement ps = null;
 
         try {
@@ -147,7 +147,8 @@ public class AlumnoData {
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            ps.setInt(5, alumno.getIdAlumno());
+            ps.setBoolean(5, alumno.isEstado());
+            ps.setInt(6, alumno.getIdAlumno());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -163,11 +164,11 @@ public class AlumnoData {
     }
 
     public void eliminarAlumno(int id) {
-
         try {
-            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
+            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? AND estado = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setBoolean(2, true);
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
@@ -175,16 +176,17 @@ public class AlumnoData {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno");
         }
     }
 
     public void activarAlumno(int id) {
 
         try {
-            String sql = "UPDATE alumno SET estado = 1 WHERE idAlumno = ? ";
+            String sql = "UPDATE alumno SET estado = 1 WHERE idAlumno = ? AND estado = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setBoolean(2, false);
             int fila = ps.executeUpdate();
             ps.close();
             if (fila == 1) {

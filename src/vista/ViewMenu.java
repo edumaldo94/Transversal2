@@ -15,6 +15,7 @@ public class ViewMenu extends javax.swing.JFrame {
      */
     public ViewMenu() {
         initComponents();
+        this.setTitle("Universidad ULP");
     }
 
     /**
@@ -147,7 +148,11 @@ public class ViewMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMateriaActionPerformed
 
     private void jAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlumnoActionPerformed
-        // TODO add your handling code here:
+        ViewAlumno va = new ViewAlumno();
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        va.setVisible(true);
+        jEscritorio.add(va);
     }//GEN-LAST:event_jAlumnoActionPerformed
 
     /**
