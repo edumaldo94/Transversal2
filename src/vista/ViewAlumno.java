@@ -17,13 +17,14 @@ import persistencia.AlumnoData;
  * @author thefl
  */
 public class ViewAlumno extends javax.swing.JInternalFrame {
-
+    private AlumnoData alumD;
     /**
      * Creates new form InternalFrameAlumno
      */
     public ViewAlumno() {
         initComponents();
         checkEstado.setEnabled(false);
+        alumD = new AlumnoData();
     }
 
     /**
@@ -273,7 +274,6 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        AlumnoData alumD = new AlumnoData();
         Alumno alum;
         String apellido = tfApellido.getText();
         String nombre = tfNombre.getText();
@@ -283,6 +283,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         boolean estado = checkEstado.isSelected();
         alum = new Alumno(dni, apellido, nombre, fechaNac, estado);
         alumD.guardarAlumno(alum);
+        limpiar();
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bSalirAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirAlumActionPerformed
@@ -290,7 +291,6 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bSalirAlumActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        AlumnoData alumD = new AlumnoData();
         Alumno alum;
         if (!tfIdAlum.getText().equals("")) {
             int id = Integer.parseInt(tfIdAlum.getText());
@@ -315,7 +315,6 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
 
     private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
         limpiar();
-        AlumnoData alumD = new AlumnoData();
         DefaultTableModel tabla = new DefaultTableModel();
         List<Alumno> dato;
         String[] fila = new String[6];
@@ -373,19 +372,21 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         boolean estado = checkEstado.isSelected();
         Alumno alum = new Alumno(id,dni,apellido,nombre,fechaNac,estado);
         alumD.modificarAlumno(alum);
+        limpiar();
     }//GEN-LAST:event_bActualizarActionPerformed
 
     private void bBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBorrarActionPerformed
         int id = Integer.parseInt(tfIdAlum.getText());
         AlumnoData alumD = new AlumnoData();
         alumD.eliminarAlumno(id);
+        limpiar();
     }//GEN-LAST:event_bBorrarActionPerformed
 
     private void bActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActivarActionPerformed
         int id = Integer.parseInt(tfIdAlum.getText());
         AlumnoData alumD = new AlumnoData();
         alumD.activarAlumno(id);
-        
+        limpiar();
     }//GEN-LAST:event_bActivarActionPerformed
 
     public void limpiar() {

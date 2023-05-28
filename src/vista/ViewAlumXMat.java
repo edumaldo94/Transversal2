@@ -146,13 +146,18 @@ public class ViewAlumXMat extends javax.swing.JInternalFrame {
         int idM = Integer.parseInt(parts[0]);
         List<Alumno> lisa = inscripData.obtenerAlumnosXMateria(idM);
         String fila[] = new String[3];
-        Double nota;
+        Double nota=0.0;
         List<Inscripcion> lis;
         for (int i = 0; i < lisa.size(); i++) {
             fila[0] = lisa.get(i).getIdAlumno() + "";
             fila[1] = lisa.get(i).getNombre();
             lis = inscripData.obtenerInscripcionesPorAlumno(lisa.get(i).getIdAlumno());
-            fila[2] = lis.get(i).getNota()+"";
+            for (Inscripcion li : lis) {
+                if (li.getIdMateria()==idM && li.getIdAlumno()==lisa.get(i).getIdAlumno()) {
+                    nota = li.getNota();
+                }
+            }
+            fila[2] = nota+"";
             tabla.addRow(fila);
         }
         jLista.setModel(tabla);
