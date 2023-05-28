@@ -98,6 +98,11 @@ public class ViewMenu extends javax.swing.JFrame {
         jMenuNota.setText("Carga de Notas");
 
         jNotasEditar.setText("Manipulacion de Notas");
+        jNotasEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNotasEditarActionPerformed(evt);
+            }
+        });
         jMenuNota.add(jNotasEditar);
 
         jMenuBar2.add(jMenuNota);
@@ -105,6 +110,11 @@ public class ViewMenu extends javax.swing.JFrame {
         jMenuConsulta.setText("Consultas");
 
         jListAlumnxMateria.setText("Listado de Alumnos por Materias");
+        jListAlumnxMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListAlumnxMateriaActionPerformed(evt);
+            }
+        });
         jMenuConsulta.add(jListAlumnxMateria);
 
         jMenuBar2.add(jMenuConsulta);
@@ -144,14 +154,15 @@ public class ViewMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jSalirActionPerformed
 
     private void jMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMateriaActionPerformed
-    
+
         jEscritorio.removeAll();
         jEscritorio.repaint();
         ViewMateria materia = new ViewMateria();
         materia.setVisible(true);
         jEscritorio.add(materia);
-                                      
-        
+        jEscritorio.moveToFront(materia);
+
+
     }//GEN-LAST:event_jMateriaActionPerformed
 
     private void jAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlumnoActionPerformed
@@ -160,17 +171,37 @@ public class ViewMenu extends javax.swing.JFrame {
         jEscritorio.repaint();
         va.setVisible(true);
         jEscritorio.add(va);
+        jEscritorio.moveToFront(va);
     }//GEN-LAST:event_jAlumnoActionPerformed
 
     private void jInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInscripcionActionPerformed
         // TODO add your handling code here:
-         jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
         ViewInscripcion inscrip = new ViewInscripcion();
         inscrip.setVisible(true);
         jEscritorio.add(inscrip);
-                                      
+        jEscritorio.moveToFront(inscrip);
+
     }//GEN-LAST:event_jInscripcionActionPerformed
+
+    private void jNotasEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNotasEditarActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ViewNotas vn = new ViewNotas();
+        vn.setVisible(true);
+        jEscritorio.add(vn);
+        jEscritorio.moveToFront(vn);
+    }//GEN-LAST:event_jNotasEditarActionPerformed
+
+    private void jListAlumnxMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListAlumnxMateriaActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ViewAlumXMat vaxm = new ViewAlumXMat();
+        vaxm.setVisible(true);
+        jEscritorio.add(vaxm);
+        jEscritorio.moveToFront(vaxm);
+    }//GEN-LAST:event_jListAlumnxMateriaActionPerformed
 
     /**
      * @param args the command line arguments

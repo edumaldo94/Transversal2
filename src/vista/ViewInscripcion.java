@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
-import persistencia.Conexion;
 import persistencia.InscripcionData;
 import persistencia.MateriaData;
 
@@ -22,16 +21,11 @@ import persistencia.MateriaData;
  * @author edu-1
  */
 public class ViewInscripcion extends javax.swing.JInternalFrame {
-    DefaultTableModel tabla;
+
+    private DefaultTableModel tabla;
     private static InscripcionData inscripData;
     private static AlumnoData alumnoData;
-    private static MateriaData materiaData;
     private List<Alumno> listaA;
-    private Inscripcion inscripcion;
-    private Materia materia;
-    private List<Materia> matTotal;
-    private Alumno alumno;
-    private Conexion con;
 
     /**
      * Creates new form ViewInscripcion
@@ -39,8 +33,8 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
     public ViewInscripcion() {
         initComponents();
         tabla = new DefaultTableModel();
+        crearTabla();
         inscripData = new InscripcionData();
-        materiaData = new MateriaData();
         alumnoData = new AlumnoData();
         listaA = (ArrayList<Alumno>) alumnoData.listarAlumnos();
         agregarAlumno();
@@ -128,6 +122,11 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
         });
 
         btnAnular.setText("Anular Inscripcion");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("   Salir   ");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -207,17 +206,21 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboAlumnoActionPerformed
 
     private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
-        String selectedItem = jComboAlumno.getSelectedItem().toString();
-        String[] parts = selectedItem.split(" ");
-        int id = Integer.parseInt(parts[0]);
-        
-        int filaSelec = jLista.getSelectedRow();
-        
-        if (filaSelec!=-1) {
-            int idMat = (Integer)jLista.getValueAt(filaSelec, 0);
-            inscripData.guardarIncripcion(new Inscripcion(0, id, idMat));
+        try {
+            String selectedItem = jComboAlumno.getSelectedItem().toString();
+            String[] parts = selectedItem.split(" ");
+            int id = Integer.parseInt(parts[0]);
+            int filaSelec = jLista.getSelectedRow();
+            if (filaSelec != -1) {
+                String idMatString = (String) tabla.getValueAt(filaSelec, 0);
+                int idMat = Integer.parseInt(idMatString);
+                inscripData.guardarIncripcion(new Inscripcion(0, id, idMat));
+            }
+            borrarTabla();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: "+ex.getMessage());
         }
-        inscripData.guardarIncripcion(inscripcion);
+
 
     }//GEN-LAST:event_btnInscribirActionPerformed
 
@@ -225,14 +228,12 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
         btnMostrarInscripta.setSelected(false);
         btnInscribir.setEnabled(true);
         btnAnular.setEnabled(false);
+        borrarTabla();
         String selectedItem = jComboAlumno.getSelectedItem().toString();
         String[] parts = selectedItem.split(" ");
         int id = Integer.parseInt(parts[0]);
         List<Materia> lisa = new ArrayList<>();
         String fila[] = new String[3];
-        tabla.addColumn("id");
-        tabla.addColumn("nombre");
-        tabla.addColumn("año");
         lisa = inscripData.obtenerMateriasNOCursadas(id);
         for (int i = 0; i < lisa.size(); i++) {
             fila[0] = lisa.get(i).getIdMateria() + "";
@@ -251,14 +252,12 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
         btnNoInscripta.setSelected(false);
         btnInscribir.setEnabled(false);
         btnAnular.setEnabled(true);
+        borrarTabla();
         String selectedItem = jComboAlumno.getSelectedItem().toString();
         String[] parts = selectedItem.split(" ");
         int id = Integer.parseInt(parts[0]);
         List<Materia> lisa = new ArrayList<>();
         String fila[] = new String[3];
-        tabla.addColumn("id");
-        tabla.addColumn("nombre");
-        tabla.addColumn("año");
         lisa = inscripData.obtenerMateriasCursadas(id);
         for (int i = 0; i < lisa.size(); i++) {
             fila[0] = lisa.get(i).getIdMateria() + "";
@@ -268,6 +267,23 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
         }
         jLista.setModel(tabla);
     }//GEN-LAST:event_btnMostrarInscriptaActionPerformed
+
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+        try {
+            String selectedItem = jComboAlumno.getSelectedItem().toString();
+            String[] parts = selectedItem.split(" ");
+            int id = Integer.parseInt(parts[0]);
+            int filaSelec = jLista.getSelectedRow();
+            if (filaSelec != -1) {
+                String idMatString = (String) tabla.getValueAt(filaSelec, 0);
+                int idMat = Integer.parseInt(idMatString);
+                inscripData.borrarInscripcionMateriaAlumno(id, idMat);
+            }
+            borrarTabla();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAnularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -292,12 +308,21 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
         }
     }
 
+    public void crearTabla() {
+        ArrayList<Object> columnas = new ArrayList<Object>();
+        columnas.add("id");
+        columnas.add("nombre");
+        columnas.add("año");
+        for (Object iter : columnas) {
+            tabla.addColumn(iter);
+        }
+        jLista.setModel(tabla);
+    }
+
     public void borrarTabla() {
-        if (tabla != null) {
-            int a = tabla.getRowCount() - 1;
-            for (int i = a; i > 0; i--) {
-                tabla.removeRow(i);
-            }
+        int a = tabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tabla.removeRow(i);
         }
     }
 
