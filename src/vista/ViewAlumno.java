@@ -280,8 +280,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         int dni = Integer.parseInt(tfDNI.getText());
         Date fechaSql = new Date(dFecha.getDate().getTime());
         LocalDate fechaNac = fechaSql.toLocalDate();
-        boolean estado = checkEstado.isSelected();
-        alum = new Alumno(dni, apellido, nombre, fechaNac, estado);
+        alum = new Alumno(dni, apellido, nombre, fechaNac, true);
         alumD.guardarAlumno(alum);
         limpiar();
     }//GEN-LAST:event_bGuardarActionPerformed

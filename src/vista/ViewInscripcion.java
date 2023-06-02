@@ -25,6 +25,7 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
     private DefaultTableModel tabla;
     private static InscripcionData inscripData;
     private static AlumnoData alumnoData;
+    private static MateriaData materiaData;
     private List<Alumno> listaA;
 
     /**
@@ -34,6 +35,7 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
         initComponents();
         tabla = new DefaultTableModel();
         crearTabla();
+        materiaData = new MateriaData();
         inscripData = new InscripcionData();
         alumnoData = new AlumnoData();
         listaA = (ArrayList<Alumno>) alumnoData.listarAlumnos();
@@ -214,7 +216,9 @@ public class ViewInscripcion extends javax.swing.JInternalFrame {
             if (filaSelec != -1) {
                 String idMatString = (String) tabla.getValueAt(filaSelec, 0);
                 int idMat = Integer.parseInt(idMatString);
-                inscripData.guardarIncripcion(new Inscripcion(0, id, idMat));
+                Alumno alum1 = alumnoData.buscarAlumno(id);
+                Materia mat1 = materiaData.buscarMateria(idMat);
+                inscripData.guardarIncripcion(new Inscripcion(0, alum1, mat1));
             }
             borrarTabla();
         } catch (Exception ex) {

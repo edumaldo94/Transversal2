@@ -179,8 +179,8 @@ public class ViewNotas extends javax.swing.JInternalFrame {
         String fila[] = new String[3];
         lisa = inscripData.obtenerInscripcionesPorAlumno(id);
         for (int i = 0; i < lisa.size(); i++) {
-            fila[0] = lisa.get(i).getIdMateria() + "";
-            mat = materiaData.buscarMateria(lisa.get(i).getIdMateria());
+            fila[0] = lisa.get(i).getMateriaId().getIdMateria() + "";
+            mat = materiaData.buscarMateria(lisa.get(i).getMateriaId().getIdMateria());
             fila[1] = mat.getNombre();
             fila[2] = lisa.get(i).getNota() + "";
             tabla.addRow(fila);

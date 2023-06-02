@@ -190,11 +190,13 @@ public class Transversal2 {
                 case 14:
                     System.out.println("Ingrese el ID del Alumno");
                     int idA = leer.nextInt();
+                    Alumno alum14 = alumData.buscarAlumno(idA);
                     System.out.println("Ingrese el ID de la Materia");
                     int idM = leer.nextInt();
+                    Materia mat14 = matData.buscarMateria(idM);
                     System.out.println("Ingrese la Nota");
                     double notaA = leer.nextDouble();
-                    insData.guardarIncripcion(new Inscripcion(notaA, idA, idM));
+                    insData.guardarIncripcion(new Inscripcion(notaA, alum14, mat14));
                     break;
                 case 15:
                     List<Inscripcion> inscripciones = new ArrayList<>();

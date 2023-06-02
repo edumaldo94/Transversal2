@@ -3,41 +3,25 @@ package entidades;
 public class Inscripcion {
     private int idInscripto;
     private double nota;
-    private int idAlumno;
-    private int idMateria;
+    private Alumno alumnoId;
+    private Materia materiaId;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(double nota, int idAlumno, int idMateria) {
+    public Inscripcion(double nota, Alumno idAlumno, Materia idMateria) {
         this.nota = nota;
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
+        this.alumnoId = idAlumno;
+        this.materiaId = idMateria;
     }
     
-    public Inscripcion(int idInscripto, double nota, int idAlumno, int idMateria) {
+    public Inscripcion(int idInscripto, double nota, Alumno idAlumno, Materia idMateria) {
         this.idInscripto = idInscripto;
         this.nota = nota;
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
+        this.alumnoId = idAlumno;
+        this.materiaId = idMateria;
     }
 
-    public int getIdAlumno() {
-        return idAlumno;
-    }
-
-    public void setIdAlumno(int idAlumno) {
-        this.idAlumno = idAlumno;
-    }
-
-    public int getIdMateria() {
-        return idMateria;
-    }
-
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
-    }
-    
     public int getIdInscripto() {
         return idInscripto;
     }
@@ -46,8 +30,6 @@ public class Inscripcion {
         this.idInscripto = idInscripto;
     }
 
-    
-    
     public double getNota() {
         return nota;
     }
@@ -56,9 +38,27 @@ public class Inscripcion {
         this.nota = nota;
     }
 
+    public Alumno getAlumnoId() {
+        return alumnoId;
+    }
+
+    public void setAlumnoId(Alumno alumnoId) {
+        this.alumnoId = alumnoId;
+    }
+
+    public Materia getMateriaId() {
+        return materiaId;
+    }
+
+    public void setMateriaId(Materia materiaId) {
+        this.materiaId = materiaId;
+    }
+
+    
+
     @Override
     public String toString() {
-        return "[ID Inscripto: " + idInscripto + " / Nota: " + nota + " / ID del Alumno: " + idAlumno + " / ID de la Materia: " + idMateria + ']';
+        return "[ID Inscripto: " + idInscripto + " / Nota: " + nota + " / ID del Alumno: " + alumnoId.getIdAlumno() + " / ID de la Materia: " + materiaId.getIdMateria() + ']';
     }
 
     
