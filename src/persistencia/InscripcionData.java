@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -71,14 +72,20 @@ public class InscripcionData {
     
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
         List<Inscripcion> inscripciones = new ArrayList<>();
+        LocalDate fechaAux = LocalDate.of(2000, 10, 1);
+        Alumno alumAux;
+        Materia matAux;
+        Inscripcion ins;
         try {
             String sql = "SELECT * FROM inscripcion "
                     + "WHERE idAlumno=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {            
-                Inscripcion ins = new Inscripcion();
+            while (rs.next()) {
+                alumAux = new Alumno();
+                matAux = new Materia();
+                ins = new Inscripcion(0,alumAux,matAux);
                 ins.getAlumnoId().setIdAlumno(rs.getInt("idAlumno"));
                 ins.setIdInscripto(rs.getInt("idInscripto"));
                 ins.getMateriaId().setIdMateria(rs.getInt("idMateria"));
